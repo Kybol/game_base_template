@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqwmokbqx5xkb"]
+
+[ext_resource type="PackedScene" uid="uid://b2fqxi1f6uprw" path="res://Scenes/UI/Menus/overlay_menu_template.tscn" id="1_1egdg"]
+[ext_resource type="Script" uid="uid://d2anii0mx4gs6" path="res://Scripts/UI/Menus/SettingsMenu.gd" id="1_xqv0n"]
+
+[node name="SettingsMenu" node_paths=PackedStringArray("_fullscreen_btn", "_resolution_btn", "_exit_btn", "_buttons_container") instance=ExtResource("1_1egdg")]
+script = ExtResource("1_xqv0n")
+_fullscreen_btn = NodePath("Panel/CenterContainer/Buttons/FullScreenBtn")
+_resolution_btn = NodePath("Panel/CenterContainer/Buttons/ResolutionBtn")
+_exit_btn = NodePath("Panel/ExitBtn")
+_buttons_container = NodePath("Panel/CenterContainer/Buttons")
+
+[node name="Title" parent="Panel" index="1"]
+text = "Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/Buttons" index="0"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/Buttons/HBoxContainer" index="0"]
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="Panel/CenterContainer/Buttons/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="MuteBtn" type="CheckBox" parent="Panel/CenterContainer/Buttons" index="1"]
+layout_mode = 2
+text = "Mute"
+
+[node name="FullScreenBtn" type="CheckButton" parent="Panel/CenterContainer/Buttons" index="2"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="ResolutionBtn" type="OptionButton" parent="Panel/CenterContainer/Buttons" index="3"]
+layout_mode = 2

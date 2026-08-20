@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://8adpqiytdwoq"]
+
+[ext_resource type="PackedScene" uid="uid://b2fqxi1f6uprw" path="res://Scenes/UI/Menus/SideMenus/overlay_menu_template.tscn" id="1_82y6f"]
+[ext_resource type="Script" uid="uid://c25xkty8q0i48" path="res://Scripts/UI/Menus/pause_menu.gd" id="2_bp3hc"]
+[ext_resource type="PackedScene" uid="uid://cqwmokbqx5xkb" path="res://Scenes/UI/Menus/SideMenus/settings_menu.tscn" id="3_13aw7"]
+[ext_resource type="PackedScene" uid="uid://bvtnfcxunfam1" path="res://Scenes/UI/Menus/MainMenu/main_menu.tscn" id="3_mxyo1"]
+
+[node name="PauseMenu" node_paths=PackedStringArray("_resume_btn", "_settings_btn", "_main_menu_btn", "_settings_menu", "_quit_btn") instance=ExtResource("1_82y6f")]
+script = ExtResource("2_bp3hc")
+_resume_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/ResumeBtn")
+_settings_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/Settings")
+_main_menu_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/MainBtn")
+_settings_menu = NodePath("SettingsMenu")
+_main_menu_path = ExtResource("3_mxyo1")
+_title = "Pause"
+_quit_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/QuitBtn")
+
+[node name="SettingsMenu" parent="." index="0" instance=ExtResource("3_13aw7")]
+visible = false
+layout_mode = 1
+
+[node name="Panel" parent="." index="1"]
+offset_left = -126.0
+offset_right = 106.0
+
+[node name="ResumeBtn" type="Button" parent="Panel/MarginContainer/CenterContainer/Buttons" index="0"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Panel/MarginContainer/CenterContainer/Buttons" index="1"]
+layout_mode = 2
+text = "Settings"
+
+[node name="MainBtn" type="Button" parent="Panel/MarginContainer/CenterContainer/Buttons" index="2"]
+layout_mode = 2
+text = "Return to Main"
+
+[node name="QuitBtn" type="Button" parent="Panel/MarginContainer/CenterContainer/Buttons" index="3"]
+layout_mode = 2
+text = "Quit"

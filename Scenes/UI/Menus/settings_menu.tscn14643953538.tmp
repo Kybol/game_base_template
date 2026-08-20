@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqwmokbqx5xkb"]
+
+[ext_resource type="PackedScene" uid="uid://b2fqxi1f6uprw" path="res://Scenes/UI/Menus/overlay_menu_template.tscn" id="1_1egdg"]
+[ext_resource type="Script" uid="uid://d2anii0mx4gs6" path="res://Scripts/UI/Menus/SettingsMenu.gd" id="1_xqv0n"]
+
+[node name="SettingsMenu" node_paths=PackedStringArray("_fullscreen_btn", "_resolution_btn", "_mute_music_btn", "_music_slider", "_mute_sfx_btn", "_sfx_slider", "_exit_btn", "_buttons_container") instance=ExtResource("1_1egdg")]
+script = ExtResource("1_xqv0n")
+_fullscreen_btn = NodePath("Panel/CenterContainer/Buttons/FullScreenBtn")
+_resolution_btn = NodePath("Panel/CenterContainer/Buttons/ResolutionBtn")
+_mute_music_btn = NodePath("Panel/CenterContainer/Buttons/Music/MuteBtn")
+_music_slider = NodePath("Panel/CenterContainer/Buttons/Music/VolumeSlider")
+_mute_sfx_btn = NodePath("Panel/CenterContainer/Buttons/Sfx/MuteBtn")
+_sfx_slider = NodePath("Panel/CenterContainer/Buttons/Sfx/VolumeSlider")
+_music_audio_bus = "Music"
+_sfx_audio_bus = "SFX"
+_exit_btn = NodePath("Panel/ExitBtn")
+_buttons_container = NodePath("Panel/CenterContainer/Buttons")
+
+[node name="Title" parent="Panel" index="1"]
+text = "Settings"
+
+[node name="Music" type="HBoxContainer" parent="Panel/CenterContainer/Buttons" index="0"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/Buttons/Music" index="0"]
+layout_mode = 2
+text = "Music"
+
+[node name="MuteBtn" type="CheckBox" parent="Panel/CenterContainer/Buttons/Music" index="1"]
+layout_mode = 2
+
+[node name="VolumeSlider" type="HSlider" parent="Panel/CenterContainer/Buttons/Music" index="2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sfx" type="HBoxContainer" parent="Panel/CenterContainer/Buttons" index="1"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/Buttons/Sfx" index="0"]
+layout_mode = 2
+text = "SFX"
+
+[node name="MuteBtn" type="CheckBox" parent="Panel/CenterContainer/Buttons/Sfx" index="1"]
+layout_mode = 2
+
+[node name="VolumeSlider" type="HSlider" parent="Panel/CenterContainer/Buttons/Sfx" index="2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="FullScreenBtn" type="CheckButton" parent="Panel/CenterContainer/Buttons" index="2"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="ResolutionBtn" type="OptionButton" parent="Panel/CenterContainer/Buttons" index="3"]
+layout_mode = 2

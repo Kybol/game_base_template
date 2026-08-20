@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://xneecxtleekr"]
+
+[ext_resource type="PackedScene" uid="uid://d3e36qpwf7jrd" path="res://Scenes/UI/game_ui.tscn" id="2_qxfds"]
+
+[node name="Game" type="Node2D"]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 487.0
+offset_top = 232.0
+offset_right = 717.0
+offset_bottom = 330.0
+text = "
+I'm the game :)"
+
+[node name="GameUi" parent="." instance=ExtResource("2_qxfds")]
+offset_left = 565.0
+offset_top = 318.0
+offset_right = 565.0
+offset_bottom = 318.0
+size_flags_horizontal = 4

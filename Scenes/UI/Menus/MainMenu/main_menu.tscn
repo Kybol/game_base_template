@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvtnfcxunfam1"]
+
+[ext_resource type="PackedScene" uid="uid://18jwe2pexcuq" path="res://Scenes/UI/Menus/menu_template.tscn" id="1_vpbyc"]
+[ext_resource type="Script" uid="uid://8csjsvbj5kke" path="res://Scripts/UI/Menus/main_menu.gd" id="2_lcymw"]
+[ext_resource type="PackedScene" uid="uid://cqwmokbqx5xkb" path="res://Scenes/UI/Menus/SideMenus/settings_menu.tscn" id="3_kqrfv"]
+[ext_resource type="AudioStream" uid="uid://d2uk10i66y8r0" path="res://Assets/Audio/Music/crab_audio-a-real-groove-322193.mp3" id="4_3ny5x"]
+
+[node name="MainMenu" node_paths=PackedStringArray("_settings_btn", "_settings_menu", "_buttons_container", "_play_btn", "_quit_btn") instance=ExtResource("1_vpbyc")]
+script = ExtResource("2_lcymw")
+_settings_btn = NodePath("CenterContainer/Buttons/SettingsBtn")
+_settings_menu = NodePath("CenterContainer/SettingsMenu")
+_buttons_container = NodePath("CenterContainer/Buttons")
+_play_btn = NodePath("CenterContainer/Buttons/PlayBtn")
+_quit_btn = NodePath("CenterContainer/Buttons/QuitBtn")
+
+[node name="PlayBtn" type="Button" parent="CenterContainer/Buttons" index="0"]
+layout_mode = 2
+text = "Play
+"
+
+[node name="SettingsBtn" type="Button" parent="CenterContainer/Buttons" index="1"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="QuitBtn" type="Button" parent="CenterContainer/Buttons" index="2"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="SettingsMenu" parent="CenterContainer" index="1" instance=ExtResource("3_kqrfv")]
+visible = false
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("4_3ny5x")
+autoplay = true
+bus = &"Music"

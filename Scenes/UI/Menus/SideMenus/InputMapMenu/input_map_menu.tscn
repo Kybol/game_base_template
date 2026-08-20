@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://boe6dnv4f6wp7"]
+
+[ext_resource type="PackedScene" uid="uid://b2fqxi1f6uprw" path="res://Scenes/UI/Menus/SideMenus/overlay_menu_template.tscn" id="1_1qlrw"]
+[ext_resource type="Script" uid="uid://5xisn0v8e5de" path="res://Scripts/UI/Menus/input_map_menu.gd" id="2_k231x"]
+
+[node name="InputMapMenu" node_paths=PackedStringArray("_action_list", "_reset_button") instance=ExtResource("1_1qlrw")]
+script = ExtResource("2_k231x")
+_action_list = NodePath("Panel/MarginContainer/ScrollContainer/ActionList")
+_reset_button = NodePath("Panel/MarginContainer/ResetButton")
+_title = ""
+
+[node name="Title" parent="Panel/MarginContainer" index="0"]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer" index="1"]
+layout_mode = 2
+
+[node name="ActionList" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" parent="Panel/MarginContainer" index="2"]
+visible = false
+
+[node name="ResetButton" type="Button" parent="Panel/MarginContainer" index="3"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+text = "Reset"
