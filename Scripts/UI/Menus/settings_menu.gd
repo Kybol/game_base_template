@@ -3,23 +3,27 @@ extends OverlayedMenu
 ###################### VARIABLES ######################
 # BUTTONS
 @export_group("Buttons")
+@export_subgroup("Video")
+@export var _has_video_settings: bool = true;
 @export var _fullscreen_btn: Button;
 @export var _resolution_btn: Button;
-@export_subgroup("Music")
+@export_subgroup("Audio")
+@export var _has_music_settings: bool = true;
 @export var _mute_music_btn: Button;
 @export var _music_slider: Slider;
-@export_subgroup("SFX")
+@export_subgroup("Audio SFX")
+@export var _has_sfx_settings: bool = true;
 @export var _mute_sfx_btn: Button;
 @export var _sfx_slider: Slider;
 
 
-@export_group("Audio Settings")
+@export_group("Audio Buses")
 @export var _music_audio_bus: String = "Music";
 @export var _sfx_audio_bus: String = "SFX";
 var _music_audio_bus_index : int;
 var _sfx_audio_bus_index : int;
 
-# BOOLEANS
+# FLAGS
 var _is_audio_mutable: bool = true;
 
 # SAVE DATA
@@ -36,9 +40,20 @@ var _saved_sfx_volume: float;
 # BASE
 func _ready() -> void:
 	super();
-
-	_init_video_settings();
-	_init_audio_settings();
+	
+	if _has_video_settings :
+		_init_video_settings();
+	else:
+		_fullscreen_btn.visible = false;
+		_resolution_btn.visible = false;
+	
+	if _has_music_settings or !_has_sfx_settings:
+		_init_audio_settings();
+	else:
+		_mute_music_btn.visible = false;
+		_music_slider.visible = false;
+		_mute_sfx_btn.visible = false;
+		_sfx_slider.visible = false;
 
 
 # PRIVATE
@@ -92,8 +107,11 @@ func _init_fullscreen(saved_settings: Dictionary) -> void:
 func _init_audio_settings() -> void:
 	var audio_saved_settings: Dictionary = ConfigFileHandler.load_audio_settings();
 	
-	_init_music(audio_saved_settings);
-	_init_sfx(audio_saved_settings);
+	if _has_music_settings:
+		_init_music(audio_saved_settings);
+
+	if _has_sfx_settings:
+		_init_sfx(audio_saved_settings);
 
 
 func _init_music(saved_settings: Dictionary) -> void:
@@ -184,24 +202,28 @@ func _change_music_volume(value: float):
 	_change_volume(
 		_music_audio_bus_index, 
 		_is_music_muted, 
+		ConfigFileHandler.audio.MUSIC_MUTED,
 		_mute_music_btn, 
 		value,
 		ConfigFileHandler.audio.MUSIC_VOLUME
 		);
 		
 	_music_volume = value;
+	_is_music_muted = _mute_music_btn.button_pressed;
 
 
 func _change_sfx_volume(value: float):
 	_change_volume(
 		_sfx_audio_bus_index,  
 		_is_sfx_muted, 
+		ConfigFileHandler.audio.SFX_MUTED,
 		_mute_sfx_btn, 
 		value,
 		ConfigFileHandler.audio.SFX_VOLUME
 		);
 	
 	_sfx_volume = value;
+	_is_sfx_muted = _mute_sfx_btn.button_pressed;
 
 
 func _mute(slider: Slider, volume: float, is_muted: bool, save_index: int) -> void:
@@ -213,7 +235,7 @@ func _mute(slider: Slider, volume: float, is_muted: bool, save_index: int) -> vo
 	ConfigFileHandler.save_audio_settings(save_index, is_muted);
 
 
-func _change_volume(audio_bus_index: int, is_muted: bool, 
+func _change_volume(audio_bus_index: int, is_muted: bool, save_mute_index: int,
 					mute_btn: Button, value: float, save_index: int) -> void:
 	var new_decibels: float = linear_to_db(value);
 	AudioServer.set_bus_volume_db(audio_bus_index, new_decibels);
@@ -225,6 +247,7 @@ func _change_volume(audio_bus_index: int, is_muted: bool,
 	if is_muted == true && value > 0.0:
 		_is_audio_mutable = false;
 		mute_btn.button_pressed = false;
+		ConfigFileHandler.save_audio_settings(save_mute_index , false);
 		_is_audio_mutable = true;
 	
 	ConfigFileHandler.save_audio_settings(save_index , value);

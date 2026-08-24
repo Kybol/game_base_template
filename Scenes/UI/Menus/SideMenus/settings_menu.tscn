@@ -5,10 +5,13 @@
 
 [node name="SettingsMenu" node_paths=PackedStringArray("_fullscreen_btn", "_resolution_btn", "_mute_music_btn", "_music_slider", "_mute_sfx_btn", "_sfx_slider") instance=ExtResource("1_1egdg")]
 script = ExtResource("1_xqv0n")
+_has_video_settings = true
 _fullscreen_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/FullScreenBtn")
 _resolution_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/ResolutionBtn")
+_has_music_settings = true
 _mute_music_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/Music/MuteBtn")
 _music_slider = NodePath("Panel/MarginContainer/CenterContainer/Buttons/Music/VolumeSlider")
+_has_sfx_settings = true
 _mute_sfx_btn = NodePath("Panel/MarginContainer/CenterContainer/Buttons/Sfx/MuteBtn")
 _sfx_slider = NodePath("Panel/MarginContainer/CenterContainer/Buttons/Sfx/VolumeSlider")
 _music_audio_bus = "Music"

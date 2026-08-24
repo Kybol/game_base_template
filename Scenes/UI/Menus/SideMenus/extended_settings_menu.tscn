@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://islnl2w8s8wr"]
+
+[ext_resource type="PackedScene" uid="uid://b2fqxi1f6uprw" path="res://Scenes/UI/Menus/SideMenus/overlay_menu_template.tscn" id="1_u3wjp"]
+[ext_resource type="Script" uid="uid://b2stll5mjubcu" path="res://Scripts/UI/Menus/extended_settings_menu.gd" id="2_d6i5v"]
+[ext_resource type="PackedScene" uid="uid://cqwmokbqx5xkb" path="res://Scenes/UI/Menus/SideMenus/settings_menu.tscn" id="2_gw53v"]
+[ext_resource type="PackedScene" uid="uid://boe6dnv4f6wp7" path="res://Scenes/UI/Menus/SideMenus/InputMapMenu/input_map_menu.tscn" id="3_18jfr"]
+
+[node name="ExtendedSettingsMenu" node_paths=PackedStringArray("settings_menu", "controls_menu", "open_settings_button", "open_controls_button") instance=ExtResource("1_u3wjp")]
+script = ExtResource("2_d6i5v")
+settings_menu = NodePath("Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu")
+controls_menu = NodePath("Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu")
+open_settings_button = NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/Button")
+open_controls_button = NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/Button2")
+_title = ""
+
+[node name="Title" parent="Panel/MarginContainer" index="0"]
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" index="1"]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="Panel/MarginContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+step = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/VScrollBar" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+focus_mode = 1
+text = "Settings"
+
+[node name="Button2" type="Button" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+focus_mode = 1
+text = "Controls"
+
+[node name="Menus" type="Control" parent="Panel/MarginContainer/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="0" instance=ExtResource("2_gw53v")]
+layout_mode = 1
+size_flags_horizontal = 3
+can_be_closed = false
+
+[node name="Panel" parent="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu" index="0"]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Background" parent="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu/Panel" index="0"]
+visible = false
+
+[node name="InputMapMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="1" instance=ExtResource("3_18jfr")]
+layout_mode = 1
+_title = "Controls"
+can_be_closed = false
+
+[node name="Panel" parent="Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu" index="0"]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="CenterContainer" parent="Panel/MarginContainer" index="2"]
+visible = false
+
+[node name="Buttons" parent="Panel/MarginContainer/CenterContainer" index="0"]
+visible = false
+
+[editable path="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu"]
+[editable path="Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu"]

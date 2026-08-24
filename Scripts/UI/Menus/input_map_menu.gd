@@ -20,6 +20,8 @@ var input_actions = {
 ###################### FUNCTIONS ######################
 # BASE
 func _ready() -> void:
+	super();
+	
 	_create_action_list();
 	_reset_button.pressed.connect(_reset);
 	
