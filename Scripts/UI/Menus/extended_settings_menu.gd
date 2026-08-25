@@ -1,18 +1,12 @@
 extends OverlayedMenu
 
 ###################### VARIABLES ######################
-# MENUS
-@export var settings_menu: OverlayedMenu;
-@export var controls_menu: OverlayedMenu;
+# MENUS & BUTTONS
+@export var first_button: OpenExtendedMenuBtn;
+@export var open_menu_buttons: Dictionary[OpenExtendedMenuBtn,OverlayedMenu];
 
-# BUTTONS
-@export var open_settings_button: Button;
-@export var open_controls_button: Button;
-
-# FLAGS
-enum menus_name {SETTINGS, CONTROLS};
-
-var is_open:Array [bool] = [];
+var open_menu_flags: Dictionary[OpenExtendedMenuBtn, bool];
+var current_open_menu: OverlayedMenu;
 
 
 ###################### FUNCTIONS ######################
@@ -22,43 +16,45 @@ func _ready() -> void:
 	
 	_init_open_flags_for_menus(false);
 	
-	_open_settings();
-	open_settings_button.pressed.connect(_open_settings);
-	open_controls_button.pressed.connect(_open_controls);
+	_open_menu(first_button);
 	
+	for btn in open_menu_buttons:
+		btn.self_sent.connect(_open_menu);
 
 
 # PUBLIC
 
 # PRIVATE
 func _init_open_flags_for_menus(value: bool) -> void:
-	for enum_name in menus_name:
-		is_open.append(value);
-
-
-func _open_settings() -> void:
-	settings_menu.enable();
-	
-	controls_menu.can_be_closed = true;
-	controls_menu.disable();
-	controls_menu.can_be_closed = false;
-	_set_open_flags_for_one_menu(menus_name.SETTINGS, true);
-
-
-func _open_controls() -> void:
-	controls_menu.enable();
-	
-	settings_menu.can_be_closed = true;
-	settings_menu.disable();
-	settings_menu.can_be_closed = true;
-	_set_open_flags_for_one_menu(menus_name.CONTROLS, true);
-
-
-func _set_open_flags_for_one_menu(displayed_menu: int,value: bool) -> void:
-	for enum_name in menus_name:
-		var enum_value: int = menus_name[enum_name];
-		if enum_value == displayed_menu:
-			is_open[enum_value] = value;
-			continue;
+	for btn in open_menu_buttons:
+		open_menu_flags.set(btn, value);
+		_close_menu(open_menu_buttons[btn]);
 		
-		is_open[enum_value] = !value;
+
+
+func _open_menu(pressed_button: OpenExtendedMenuBtn) -> void:
+	if open_menu_flags[pressed_button]: return;
+	var menu_to_open: OverlayedMenu = open_menu_buttons.get(pressed_button);
+	menu_to_open.enable();
+	
+	if current_open_menu:
+		_close_menu(current_open_menu);
+	_set_open_flags_for_one_menu(pressed_button, true);
+	
+	current_open_menu = menu_to_open;
+
+
+func _close_menu(menu_to_close: OverlayedMenu) -> void:
+	if current_open_menu && menu_to_close != current_open_menu: return;
+	
+	menu_to_close.can_be_closed = true;
+	menu_to_close.disable();
+	menu_to_close.can_be_closed = false;
+
+
+func _set_open_flags_for_one_menu(menu_key: OpenExtendedMenuBtn,value: bool) -> void:
+	for btn in open_menu_flags:
+		if btn == menu_key:
+			open_menu_flags[btn] = value;
+			continue;
+		open_menu_flags[btn] = !value;

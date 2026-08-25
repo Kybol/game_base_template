@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Menu_template"
+config/name="game_base"
 run/main_scene="uid://bvtnfcxunfam1"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"

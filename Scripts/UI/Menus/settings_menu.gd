@@ -1,4 +1,5 @@
 extends OverlayedMenu
+class_name SettingsMenu
 
 ###################### VARIABLES ######################
 # BUTTONS
@@ -9,10 +10,12 @@ extends OverlayedMenu
 @export var _resolution_btn: Button;
 @export_subgroup("Audio")
 @export var _has_music_settings: bool = true;
+@export var _music_label: Label;
 @export var _mute_music_btn: Button;
 @export var _music_slider: Slider;
 @export_subgroup("Audio SFX")
 @export var _has_sfx_settings: bool = true;
+@export var _sfx_label: Label;
 @export var _mute_sfx_btn: Button;
 @export var _sfx_slider: Slider;
 
@@ -43,17 +46,20 @@ func _ready() -> void:
 	
 	if _has_video_settings :
 		_init_video_settings();
-	else:
-		_fullscreen_btn.visible = false;
-		_resolution_btn.visible = false;
 	
-	if _has_music_settings or !_has_sfx_settings:
+	_fullscreen_btn.visible = _has_video_settings;
+	_resolution_btn.visible = _has_video_settings;
+	
+	if _has_music_settings or _has_sfx_settings:
 		_init_audio_settings();
-	else:
-		_mute_music_btn.visible = false;
-		_music_slider.visible = false;
-		_mute_sfx_btn.visible = false;
-		_sfx_slider.visible = false;
+	
+	_music_label.visible = _has_music_settings;
+	_mute_music_btn.visible = _has_music_settings;
+	_music_slider.visible = _has_music_settings;
+		
+	_sfx_label.visible = _has_sfx_settings;
+	_mute_sfx_btn.visible = _has_sfx_settings;
+	_sfx_slider.visible = _has_sfx_settings;
 
 
 # PRIVATE
@@ -144,6 +150,7 @@ func _init_sfx(saved_settings: Dictionary) -> void:
 	
 	_mute_sfx_btn.button_pressed = _is_sfx_muted;
 	_sfx_slider.value = _sfx_volume;
+
 
 
 func _toggle_fullscreen(toggled_on: bool) -> void:

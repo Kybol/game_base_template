@@ -6,13 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://boe6dnv4f6wp7" path="res://Scenes/UI/Menus/SideMenus/InputMapMenu/input_map_menu.tscn" id="3_18jfr"]
 [ext_resource type="PackedScene" uid="uid://g5mf1ltumtvh" path="res://Scenes/UI/Menus/SideMenus/SettingsMenu/open_extended_menu_btn.tscn" id="3_njcbn"]
 
-[node name="ExtendedSettingsMenu" node_paths=PackedStringArray("first_button", "open_menu_buttons") instance=ExtResource("1_u3wjp")]
+[node name="ExtendedSettingsMenu" node_paths=PackedStringArray("open_menu_buttons") instance=ExtResource("1_u3wjp")]
 script = ExtResource("2_d6i5v")
-first_button = NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/AudioBtn")
 open_menu_buttons = {
-NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/AudioBtn"): NodePath("Panel/MarginContainer/HBoxContainer/Menus/AudioMenu"),
-NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/ControlBtn"): NodePath("Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu"),
-NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/VideoBtn"): NodePath("Panel/MarginContainer/HBoxContainer/Menus/VideoMenu")
+NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/SettingsBtn"): NodePath("Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu"),
+NodePath("Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer/ControlBtn"): NodePath("Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu")
 }
 _title = ""
 
@@ -42,15 +40,11 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer" index="0"]
 layout_mode = 2
 
-[node name="AudioBtn" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="0" instance=ExtResource("3_njcbn")]
+[node name="SettingsBtn" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="0" instance=ExtResource("3_njcbn")]
 layout_mode = 2
-btn_name = "Audio"
+btn_name = "Settings"
 
-[node name="VideoBtn" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="1" instance=ExtResource("3_njcbn")]
-layout_mode = 2
-btn_name = "Video"
-
-[node name="ControlBtn" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="2" instance=ExtResource("3_njcbn")]
+[node name="ControlBtn" parent="Panel/MarginContainer/HBoxContainer/VScrollBar/MarginContainer/VBoxContainer" index="1" instance=ExtResource("3_njcbn")]
 layout_mode = 2
 btn_name = "Controls"
 
@@ -58,14 +52,12 @@ btn_name = "Controls"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="0" instance=ExtResource("2_gw53v")]
+[node name="SettingsMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="0" instance=ExtResource("2_gw53v")]
 layout_mode = 1
 size_flags_horizontal = 3
-_has_video_settings = false
-_title = "Audio"
 can_be_closed = false
 
-[node name="Panel" parent="Panel/MarginContainer/HBoxContainer/Menus/AudioMenu" index="0"]
+[node name="Panel" parent="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu" index="0"]
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
@@ -76,32 +68,10 @@ offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="Background" parent="Panel/MarginContainer/HBoxContainer/Menus/AudioMenu/Panel" index="0"]
+[node name="Background" parent="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu/Panel" index="0"]
 visible = false
 
-[node name="VideoMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="1" instance=ExtResource("2_gw53v")]
-layout_mode = 1
-size_flags_horizontal = 3
-_has_music_settings = false
-_has_sfx_settings = false
-_title = "Video"
-can_be_closed = false
-
-[node name="Panel" parent="Panel/MarginContainer/HBoxContainer/Menus/VideoMenu" index="0"]
-anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="Background" parent="Panel/MarginContainer/HBoxContainer/Menus/VideoMenu/Panel" index="0"]
-visible = false
-
-[node name="InputMapMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="2" instance=ExtResource("3_18jfr")]
+[node name="InputMapMenu" parent="Panel/MarginContainer/HBoxContainer/Menus" index="1" instance=ExtResource("3_18jfr")]
 layout_mode = 1
 _title = "Controls"
 can_be_closed = false
@@ -123,6 +93,5 @@ visible = false
 [node name="Buttons" parent="Panel/MarginContainer/CenterContainer" index="0"]
 visible = false
 
-[editable path="Panel/MarginContainer/HBoxContainer/Menus/AudioMenu"]
-[editable path="Panel/MarginContainer/HBoxContainer/Menus/VideoMenu"]
+[editable path="Panel/MarginContainer/HBoxContainer/Menus/SettingsMenu"]
 [editable path="Panel/MarginContainer/HBoxContainer/Menus/InputMapMenu"]
